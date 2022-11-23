@@ -17,17 +17,19 @@ const students = [{
   name: 'silvia'
 }]
 
+
+
 const availableMaleNames = ['pepe', 'juan', 'victor', 'Leo', 'francisco', 'carlos'];
 const availableFemaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
 const availableGenders = ['male', 'female'];
 
-let userNumber = 2
+let userNumber = 4
 
 /*
 
 -Cuando se ejecute el programa, imprimir en consola las opciones del usuario. Seguir preguntando hasta que se pulse 0.
 DONE-Cuando se pulse 1 se mostrará en forma tabla a los alumnos
--Cuando se pulse 2 se mostrará la cantidad de alumnos que hay
+DONE-Cuando se pulse 2 se mostrará la cantidad de alumnos que hay
 -Cuando se pulse 3 se mostrarán los nombres de los alumnos
 -Cuando se pulse 4 se elimina el último alumno de la clase
 -Cuando se pulse 5 se elimina a un alumno aleatorio de la clase
@@ -49,13 +51,19 @@ no se sube la nota
 
 
 switch(userNumber) {
-  case 1:
+  case 1: /*Se imprimen los alumnos en una tabla*/
     console.table(students)
     break
   
-  case 2:
+  case 2: /*Se imprime la cantidad de alumnos*/
     console.log(students.length)
     break
+  
+  case 3: /*Se imprimen los nombres de los alumnos*/
+    students.forEach(item => console.log(item.name))
+    break
+  
+  case 4:
   
   default:
     console.log("es de prueba")
