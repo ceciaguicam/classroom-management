@@ -23,7 +23,7 @@ const availableMaleNames = ['pepe', 'juan', 'victor', 'Leo', 'francisco', 'carlo
 const availableFemaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
 const availableGenders = ['male', 'female'];
 
-let userNumber = 5
+let userNumber = 6
 
 /*
 
@@ -56,6 +56,14 @@ function calculateRandomNumber(min, max) {
   return randomNumber;
 }
 
+function isWoman(person) {
+  return person.gender === "female"
+}
+
+function myFunction() {
+  document.getElementById("demo").innerHTML = ages.filter(checkAge);
+}
+
 
 switch(userNumber) {
   case 1: /*Se imprimen los alumnos en una tabla*/
@@ -79,6 +87,11 @@ switch(userNumber) {
     randomNumber = calculateRandomNumber(0, students.length-1)
     students.splice(randomNumber, 1)
     console.table(students)
+    break
+  
+  case 6: /*Se muestran los datos de las alumnas*/
+    let onlyWomen = students.filter(student => student.gender === "female" )
+    console.table(onlyWomen)
     break
 
   default:
