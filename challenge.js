@@ -23,7 +23,7 @@ const availableMaleNames = ['pepe', 'juan', 'victor', 'Leo', 'francisco', 'carlo
 const availableFemaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
 const availableGenders = ['male', 'female'];
 
-let userNumber = 6
+let userNumber = 7
 
 /*
 
@@ -35,8 +35,11 @@ DONE-Cuando se pulse 4 se elimina el último alumno de la clase
 DONE-Cuando se pulse 5 se elimina a un alumno aleatorio de la clase
   DONE.Una variable se iguala a un nº al azar entre el 1 y el length de la lista
   DONE.Se elimina el item que tiene como índice el número aleatorio escogido
--Cuando se pulse 6 se muestran los datos de las alumnas
--Cuando se pulsa 7 se muestra la cantidad de alumnos y la cantidad de alumnas
+DONE-Cuando se pulse 6 se muestran los datos de las alumnas
+DONE-Cuando se pulsa 7 se muestra la cantidad de alumnos y la cantidad de alumnas
+  DONE.Calcular la cantidad de alumnas y recogerlo en una variable
+  DONE.Calcular la cantidad de alumnos y recogerlo en una variable
+  DONE.Mostrar ambas variables en la consola
 -Cuando se pulsa 8 se muestra True si todos los alumnos son chicas, y False si hay 1 o más chicos
 -Cuando se pulsa 9 se muestran los nombres de los alumnos de entre 20 y 25 años
 -Cuando se pulsa 10 se añade un nuevo datos con datos aleatorios: nombre, edad entre 20 y 50, género y calificaciones vacío
@@ -60,9 +63,6 @@ function isWoman(person) {
   return person.gender === "female"
 }
 
-function myFunction() {
-  document.getElementById("demo").innerHTML = ages.filter(checkAge);
-}
 
 
 switch(userNumber) {
@@ -93,7 +93,16 @@ switch(userNumber) {
     let onlyWomen = students.filter(student => student.gender === "female" )
     console.table(onlyWomen)
     break
-
+  
+  case 7: /*Se muestra la cantidad de alumnos y de alumnas*/
+    let women = students.filter(student => student.gender === "female" )
+    amountOfWomen = women.length
+    let men = students.filter(student => student.gender === "male" )
+    amountOfMen = men.length
+    console.log("Alumnas: " + amountOfWomen)
+    console.log("Alumnos: " + amountOfMen)
+    break
+    
   default:
     console.log("es de prueba")
     break
