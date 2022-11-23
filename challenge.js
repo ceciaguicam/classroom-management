@@ -21,7 +21,7 @@ const availableMaleNames = ['pepe', 'juan', 'victor', 'Leo', 'francisco', 'carlo
 const availableFemaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
 const availableGenders = ['male', 'female'];
 
-let userNumber = 3
+let userNumber = 2
 
 /*
 
@@ -47,7 +47,7 @@ DONE-Cuando se pulse 1 se mostrará en forma tabla a los alumnos
 no se sube la nota
 */
 
-/*
+
 switch(userNumber) {
   case 1:
     console.table(students)
@@ -61,7 +61,5 @@ switch(userNumber) {
     console.log("es de prueba")
     break
 }
-*/
 
-console.log(students.length)
 
