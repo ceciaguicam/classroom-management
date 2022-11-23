@@ -23,16 +23,18 @@ const availableMaleNames = ['pepe', 'juan', 'victor', 'Leo', 'francisco', 'carlo
 const availableFemaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
 const availableGenders = ['male', 'female'];
 
-let userNumber = 4
+let userNumber = 5
 
 /*
 
 -Cuando se ejecute el programa, imprimir en consola las opciones del usuario. Seguir preguntando hasta que se pulse 0.
 DONE-Cuando se pulse 1 se mostrará en forma tabla a los alumnos
 DONE-Cuando se pulse 2 se mostrará la cantidad de alumnos que hay
--Cuando se pulse 3 se mostrarán los nombres de los alumnos
--Cuando se pulse 4 se elimina el último alumno de la clase
--Cuando se pulse 5 se elimina a un alumno aleatorio de la clase
+DONE-Cuando se pulse 3 se mostrarán los nombres de los alumnos
+DONE-Cuando se pulse 4 se elimina el último alumno de la clase
+DONE-Cuando se pulse 5 se elimina a un alumno aleatorio de la clase
+  DONE.Una variable se iguala a un nº al azar entre el 1 y el length de la lista
+  DONE.Se elimina el item que tiene como índice el número aleatorio escogido
 -Cuando se pulse 6 se muestran los datos de las alumnas
 -Cuando se pulsa 7 se muestra la cantidad de alumnos y la cantidad de alumnas
 -Cuando se pulsa 8 se muestra True si todos los alumnos son chicas, y False si hay 1 o más chicos
@@ -49,6 +51,11 @@ DONE-Cuando se pulse 2 se mostrará la cantidad de alumnos que hay
 no se sube la nota
 */
 
+function calculateRandomNumber(min, max) {
+  const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+  return randomNumber;
+}
+
 
 switch(userNumber) {
   case 1: /*Se imprimen los alumnos en una tabla*/
@@ -63,11 +70,21 @@ switch(userNumber) {
     students.forEach(item => console.log(item.name))
     break
   
-  case 4:
+  case 4: /*Se elimina el último alumno del array*/
+    students.pop()
+    console.table(students)
+    break
   
+  case 5: /*Se elimina un alumno aleatorio*/
+    randomNumber = calculateRandomNumber(0, students.length-1)
+    students.splice(randomNumber, 1)
+    console.table(students)
+    break
+
   default:
     console.log("es de prueba")
     break
 }
+
 
 
