@@ -15,6 +15,24 @@ const students = [{
   examScores: [],
   gender: 'female',
   name: 'silvia'
+},
+{
+  age: 36,
+  examScores: [],
+  gender: "female",
+  name: "nuria"
+},
+{
+  age: 24,
+  examScores: [],
+  gender: "male",
+  name: "alberto"
+},
+{
+  age: 31,
+  examScores: [],
+  gender: "female",
+  name: "blanca"
 }]
 
 
@@ -23,7 +41,7 @@ const availableMaleNames = ['pepe', 'juan', 'victor', 'Leo', 'francisco', 'carlo
 const availableFemaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
 const availableGenders = ['male', 'female'];
 
-let userNumber = 7
+let userNumber = 8
 
 /*
 
@@ -41,8 +59,12 @@ DONE-Cuando se pulsa 7 se muestra la cantidad de alumnos y la cantidad de alumna
   DONE.Calcular la cantidad de alumnos y recogerlo en una variable
   DONE.Mostrar ambas variables en la consola
 -Cuando se pulsa 8 se muestra True si todos los alumnos son chicas, y False si hay 1 o más chicos
+  .Comprueba si hay algún chico en la lista
+  .Devuelve False si hay alguno, y True si no hay ninguno
 -Cuando se pulsa 9 se muestran los nombres de los alumnos de entre 20 y 25 años
--Cuando se pulsa 10 se añade un nuevo datos con datos aleatorios: nombre, edad entre 20 y 50, género y calificaciones vacío
+  .Con filter se hace una variable con una lista con los nombres de los alumnos de entre 20 y 25 años
+  .Se imprime esa variable
+-Cuando se pulsa 10 se añade un nuevo alumno con datos aleatorios: nombre, edad entre 20 y 50, género y calificaciones vacío
 -Cuando se pulsa 11 se muestra el nombre de la persona más joven de clase
 -Cuando se pulsa 12 se muestra la edad media de los alumnos (incluidas las chicas)
 -Cuando se pulsa 13 se muestra la edad media de las alumnas
@@ -61,6 +83,15 @@ function calculateRandomNumber(min, max) {
 
 function isWoman(person) {
   return person.gender === "female"
+}
+
+function areAllWomen(students){
+  let allWomen = false
+  anyMan = students.some(student => student.gender === "male")
+  if (anyMan === false){
+    allWomen = true
+  }
+  return allWomen
 }
 
 
@@ -101,6 +132,10 @@ switch(userNumber) {
     amountOfMen = men.length
     console.log("Alumnas: " + amountOfWomen)
     console.log("Alumnos: " + amountOfMen)
+    break
+  
+  case 8: /*Muestra False si hay algún chico y True si son todas mujeres*/
+    console.log(areAllWomen(students))
     break
     
   default:
