@@ -55,11 +55,11 @@ const students = [{
 
 
 
-const availableMaleNames = ['pepe', 'juan', 'victor', 'Leo', 'francisco', 'carlos'];
-const availableFemaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
-const availableGenders = ['male', 'female'];
+const maleNames = ['pepe', 'juan', 'victor', 'leo', 'francisco', 'carlos'];
+const femaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
+const genders = ['male', 'female'];
 
-let userNumber = 9
+let userNumber = 10
 
 /*
 
@@ -82,7 +82,18 @@ DONE-Cuando se pulsa 8 se muestra True si todos los alumnos son chicas, y False 
 DONE-Cuando se pulsa 9 se muestran los nombres de los alumnos de entre 20 y 25 años
   DONE.Con filter se hace una variable con una lista con los nombres de los alumnos de entre 20 y 25 años
   DONE.Se imprimen los nombres de la lista creada
--Cuando se pulsa 10 se añade un nuevo alumno con datos aleatorios: nombre, edad entre 20 y 50, género y calificaciones vacío
+DONE-Cuando se pulsa 10 se añade un nuevo alumno con datos aleatorios: nombre, edad entre 20 y 50, género y calificaciones vacío
+  DONE.Se crea una función que crea un objeto nuevo
+    DONE*Se crea la variable gender sacando un elemento al azar de un array
+    DONE*Se crea la variable nomnbre
+    DONE*Si gender es male, la variable nombre se iguala a un elemento al azar de un array de nombres masculinos
+    DONE*Si gender es female, la variable nombre se iguala a un elemento al azar de un array de nombres femeninos
+    DONE*Se crea la variable y se iguala a un número al azar entre 20 y 25 usando la función calculateRandomNumber
+    DONE*Se crea una variable vacía llamada notas
+    DONE*Se crea una variable llamada newObject con un objeto con los datos que se acaban de crear en las variables
+    DONE*Se devuelve esa variable
+  DONE.Se crea una variable newObject y se iguala a la función
+  DONE.Se añade el contenido de esa variable al final de la lista students
 -Cuando se pulsa 11 se muestra el nombre de la persona más joven de clase
 -Cuando se pulsa 12 se muestra la edad media de los alumnos (incluidas las chicas)
 -Cuando se pulsa 13 se muestra la edad media de las alumnas
@@ -112,6 +123,38 @@ function areAllWomen(students){
   return allWomen
 }
 
+function randomGender (genders) {
+  let randomGenderNumber = calculateRandomNumber(0, 1)
+  let newGender = genders[randomGenderNumber]
+  return newGender
+}
+
+function randomName (newGender, femaleNames, maleNames) {
+  let newName
+  let randomNameNumber
+
+  if (newGender === "female"){
+      randomNameNumber = calculateRandomNumber(0, femaleNames.length - 1)
+      newName = femaleNames[randomNameNumber]
+  }
+
+  else if (newGender === "male"){
+      randomNameNumber = calculateRandomNumber(0, maleNames.length - 1)
+      newName = maleNames[randomNameNumber]
+  
+  }
+
+  return newName
+}
+
+function newStudent(maleNames, femaleNames, genders) {
+  let newAge = calculateRandomNumber(20, 50)
+  let newGender = randomGender(genders)
+  let newName = randomName(newGender, femaleNames, maleNames)
+  let newObject = {age: newAge, examScores: [], gender: newGender, name: newName}
+  return newObject
+}
+
 
 
 switch(userNumber) {
@@ -133,7 +176,7 @@ switch(userNumber) {
     break
   
   case 5: /*Se elimina un alumno aleatorio*/
-    randomNumber = calculateRandomNumber(0, students.length-1)
+    let randomNumber = calculateRandomNumber(0, students.length-1)
     students.splice(randomNumber, 1)
     console.table(students)
     break
@@ -159,6 +202,20 @@ switch(userNumber) {
   case 9: /*Se muestran los nombres de los alumnos de entre 20 y 25 años*/
     let youngerStudents = students.filter(student => student.age >= 20 & student.age <= 25 )
     youngerStudents.forEach(item => console.log(item.name))
+    break
+  
+  case 10: /*Se crea un nuevo alumno con datos aleatorios y sin notas*/
+    students.push(newStudent(maleNames, femaleNames, genders))
+    console.table(students)
+    break
+  
+  case 11: /*Se muestra el nombre del alumno más pequeño*/
+    break
+
+  case 12: /*¿?*/
+    break
+
+  case 13: /*Se muestra la media de edad de las alumnas mujeres*/
     break
 
   default:
