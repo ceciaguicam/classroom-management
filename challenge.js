@@ -33,6 +33,24 @@ const students = [{
   examScores: [],
   gender: "female",
   name: "blanca"
+},
+{
+  age: 20,
+  examScores: [],
+  gender: "male",
+  name: "sergio"
+},
+{
+  age: 25,
+  examScores: [],
+  gender: "female",
+  name: "sandra"
+},
+{
+  age: 22,
+  examScores: [],
+  gender: "female",
+  name: "carla"
 }]
 
 
@@ -41,7 +59,7 @@ const availableMaleNames = ['pepe', 'juan', 'victor', 'Leo', 'francisco', 'carlo
 const availableFemaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
 const availableGenders = ['male', 'female'];
 
-let userNumber = 8
+let userNumber = 9
 
 /*
 
@@ -58,12 +76,12 @@ DONE-Cuando se pulsa 7 se muestra la cantidad de alumnos y la cantidad de alumna
   DONE.Calcular la cantidad de alumnas y recogerlo en una variable
   DONE.Calcular la cantidad de alumnos y recogerlo en una variable
   DONE.Mostrar ambas variables en la consola
--Cuando se pulsa 8 se muestra True si todos los alumnos son chicas, y False si hay 1 o más chicos
-  .Comprueba si hay algún chico en la lista
-  .Devuelve False si hay alguno, y True si no hay ninguno
--Cuando se pulsa 9 se muestran los nombres de los alumnos de entre 20 y 25 años
-  .Con filter se hace una variable con una lista con los nombres de los alumnos de entre 20 y 25 años
-  .Se imprime esa variable
+DONE-Cuando se pulsa 8 se muestra True si todos los alumnos son chicas, y False si hay 1 o más chicos
+  DONE.Comprueba si hay algún chico en la lista
+  DONE.Devuelve False si hay alguno, y True si no hay ninguno
+DONE-Cuando se pulsa 9 se muestran los nombres de los alumnos de entre 20 y 25 años
+  DONE.Con filter se hace una variable con una lista con los nombres de los alumnos de entre 20 y 25 años
+  DONE.Se imprimen los nombres de la lista creada
 -Cuando se pulsa 10 se añade un nuevo alumno con datos aleatorios: nombre, edad entre 20 y 50, género y calificaciones vacío
 -Cuando se pulsa 11 se muestra el nombre de la persona más joven de clase
 -Cuando se pulsa 12 se muestra la edad media de los alumnos (incluidas las chicas)
@@ -137,7 +155,12 @@ switch(userNumber) {
   case 8: /*Muestra False si hay algún chico y True si son todas mujeres*/
     console.log(areAllWomen(students))
     break
-    
+  
+  case 9: /*Se muestran los nombres de los alumnos de entre 20 y 25 años*/
+    let youngerStudents = students.filter(student => student.age >= 20 & student.age <= 25 )
+    youngerStudents.forEach(item => console.log(item.name))
+    break
+
   default:
     console.log("es de prueba")
     break
