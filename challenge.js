@@ -59,7 +59,7 @@ const maleNames = ['pepe', 'juan', 'victor', 'leo', 'francisco', 'carlos'];
 const femaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
 const genders = ['male', 'female'];
 
-let userNumber = 12
+let userNumber = 14
 
 /*
 
@@ -98,8 +98,10 @@ DONE-Cuando se pulsa 10 se añade un nuevo alumno con datos aleatorios: nombre, 
   .Encontrar la edad más pequeña
   .Encontrar al alumno con esa edad
   .Mostrar en consola el nombre del alumno
--Cuando se pulsa 12 se muestra la edad media de los alumnos (incluidas las chicas)
--Cuando se pulsa 13 se muestra la edad media de las alumnas
+DONE-Cuando se pulsa 12 se muestra la edad media de los alumnos (incluidas las chicas)
+DONE-Cuando se pulsa 13 se muestra la edad media de las alumnas
+  DONE.Hacer un array solo con los datos de las chicas (caso 6)
+  DONE.Sacar la media de sus edades (caso 12)
 -Cuando se pulsa 14 se añade una nota aleatoria entre 0 y 10 a cada uno de los alumnos
 -Cuando se pulsa 15 se ordenan por orden alfabético la lista de alumnos
 -Cuando se pulsa 16 se muestra el alumno con las mejores notas (mayor sumatorio de notas)
@@ -233,6 +235,17 @@ switch(userNumber) {
     break
 
   case 13: /*Se muestra la media de edad de las alumnas mujeres*/
+    let listOfWomen = students.filter(student => student.gender === "female" )
+    console.log(calculateAverageAge(listOfWomen))
+    break
+
+  case 14: /*Se crea una nota aleatoria de 1 a 10 en cada alumno*/
+    let randomNote
+    students.forEach(item => {
+      randomNote = calculateRandomNumber(1, 10)
+      item.examScores.push(randomNote)
+    })
+    console.table(students)
     break
 
   default:
