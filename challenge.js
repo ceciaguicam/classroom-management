@@ -59,7 +59,7 @@ const maleNames = ['pepe', 'juan', 'victor', 'leo', 'francisco', 'carlos'];
 const femaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
 const genders = ['male', 'female'];
 
-let userNumber = 10
+let userNumber = 12
 
 /*
 
@@ -95,6 +95,9 @@ DONE-Cuando se pulsa 10 se añade un nuevo alumno con datos aleatorios: nombre, 
   DONE.Se crea una variable newObject y se iguala a la función
   DONE.Se añade el contenido de esa variable al final de la lista students
 -Cuando se pulsa 11 se muestra el nombre de la persona más joven de clase
+  .Encontrar la edad más pequeña
+  .Encontrar al alumno con esa edad
+  .Mostrar en consola el nombre del alumno
 -Cuando se pulsa 12 se muestra la edad media de los alumnos (incluidas las chicas)
 -Cuando se pulsa 13 se muestra la edad media de las alumnas
 -Cuando se pulsa 14 se añade una nota aleatoria entre 0 y 10 a cada uno de los alumnos
@@ -155,6 +158,19 @@ function newStudent(maleNames, femaleNames, genders) {
   return newObject
 }
 
+function sumAges(students) {
+  let sumOfAges = 0
+  students.forEach(item => {
+      sumOfAges += item.age
+  })
+  return sumOfAges
+}
+
+function calculateAverageAge(students) {
+  let sumOfAges = sumAges(students)
+  let averageAge = sumOfAges / students.length
+  return averageAge
+}
 
 
 switch(userNumber) {
@@ -212,7 +228,8 @@ switch(userNumber) {
   case 11: /*Se muestra el nombre del alumno más pequeño*/
     break
 
-  case 12: /*¿?*/
+  case 12: /*Se muestra la edad media de todos los alumnos*/
+    console.log(calculateAverageAge(students))
     break
 
   case 13: /*Se muestra la media de edad de las alumnas mujeres*/
