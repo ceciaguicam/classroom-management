@@ -1,8 +1,4 @@
-/* 
-  si utilizáis algún import en vuestra solución, recordad que hay que indicarle a node 
-  que estamos utilizando módulos. Para ello, debemos incluir el fichero package.json que 
-  veis en este repositorio. En caso de que no os funcione, contactadme por discord.
-*/
+import readline from 'readline'
 
 const students = [{
   age: 32,
@@ -59,31 +55,6 @@ const maleNames = ['pepe', 'juan', 'victor', 'leo', 'francisco', 'carlos'];
 const femaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
 const genders = ['male', 'female'];
 
-let userNumber = 18
-
-/*
-
--Cuando se ejecute el programa, imprimir en consola las opciones del usuario. Seguir preguntando hasta que se pulse 0.
-DONE-Cuando se pulse 1 se mostrará en forma tabla a los alumnos
-DONE-Cuando se pulse 2 se mostrará la cantidad de alumnos que hay
-DONE-Cuando se pulse 3 se mostrarán los nombres de los alumnos
-DONE-Cuando se pulse 4 se elimina el último alumno de la clase
-DONE-Cuando se pulse 5 se elimina a un alumno aleatorio de la clase
-DONE-Cuando se pulse 6 se muestran los datos de las alumnas
-DONE-Cuando se pulsa 7 se muestra la cantidad de alumnos y la cantidad de alumnas
-DONE-Cuando se pulsa 8 se muestra True si todos los alumnos son chicas, y False si hay 1 o más chicos
-DONE-Cuando se pulsa 9 se muestran los nombres de los alumnos de entre 20 y 25 años
-DONE-Cuando se pulsa 10 se añade un nuevo alumno con datos aleatorios: nombre, edad entre 20 y 50, género y calificaciones vacío
-DONE-Cuando se pulsa 11 se muestra el nombre de la persona más joven de clase
-DONE-Cuando se pulsa 12 se muestra la edad media de los alumnos (incluidas las chicas)
-DONE-Cuando se pulsa 13 se muestra la edad media de las alumnas
-DONE-Cuando se pulsa 14 se añade una nota aleatoria entre 0 y 10 a cada uno de los alumnos
-DONE-Cuando se pulsa 15 se ordenan por orden alfabético la lista de alumnos
-DONE-Cuando se pulsa 16 se muestra el alumno con las mejores notas (mayor sumatorio de notas
-DONE-Cuando se pulsa 17 se muestra al alumno con mejor nota media y su media
--Cuando se pulsa 18 se añade 1 punto a cada nota de cada alumno. Si el alumno no tiene ninguna nota se le pone un 10. Si tiene algún 10
-no se sube la nota
-*/
 
 function calculateRandomNumber(min, max) {
   const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -96,7 +67,7 @@ function isWoman(person) {
 
 function areAllWomen(students){
   let allWomen = false
-  anyMan = students.some(student => student.gender === "male")
+  let anyMan = students.some(student => student.gender === "male")
   if (anyMan === false){
     allWomen = true
   }
@@ -140,7 +111,7 @@ function getBestScoredStudent(students) {
   let bestScoredStudent 
   
   students.forEach(student => {
-      totalScore = student.examScores.reduce(
+      let totalScore = student.examScores.reduce(
         (a, b) => a + b
       )
       
@@ -200,11 +171,11 @@ function getBestAvgStudent(students) {
   let bestAvgStudent
   
   students.forEach(student => {
-      totalScore = student.examScores.reduce(
+      let totalScore = student.examScores.reduce(
         (a, b) => a + b
       )
 
-      avgScore = totalScore / student.examScores.length
+      let avgScore = totalScore / student.examScores.length
       
       if (avgScore > bestAvg) {
         bestAvg = avgScore
@@ -233,100 +204,153 @@ function incrementScores(students) {
   return students
 }
 
-switch(userNumber) {
-  case 1: /*Se imprimen los alumnos en una tabla*/
-    console.table(students)
-    break
-  
-  case 2: /*Se imprime la cantidad de alumnos*/
-    console.log(students.length)
-    break
-  
-  case 3: /*Se imprimen los nombres de los alumnos*/
-    students.forEach(item => console.log(item.name))
-    break
-  
-  case 4: /*Se elimina el último alumno del array*/
-    students.pop()
-    console.table(students)
-    break
-  
-  case 5: /*Se elimina un alumno aleatorio*/
-    let randomNumber = calculateRandomNumber(0, students.length-1)
-    students.splice(randomNumber, 1)
-    console.table(students)
-    break
-  
-  case 6: /*Se muestran los datos de las alumnas*/
-    let onlyWomen = students.filter(student => student.gender === "female" )
-    console.table(onlyWomen)
-    break
-  
-  case 7: /*Se muestra la cantidad de alumnos y de alumnas*/
-    let women = students.filter(student => student.gender === "female" )
-    amountOfWomen = women.length
-    let men = students.filter(student => student.gender === "male" )
-    amountOfMen = men.length
-    console.log("Alumnas: " + amountOfWomen)
-    console.log("Alumnos: " + amountOfMen)
-    break
-  
-  case 8: /*Muestra False si hay algún chico y True si son todas mujeres*/
-    console.log(areAllWomen(students))
-    break
-  
-  case 9: /*Se muestran los nombres de los alumnos de entre 20 y 25 años*/
-    let youngerStudents = students.filter(student => student.age >= 20 & student.age <= 25 )
-    youngerStudents.forEach(item => console.log(item.name))
-    break
-  
-  case 10: /*Se crea un nuevo alumno con datos aleatorios y sin notas*/
-    students.push(newStudent(maleNames, femaleNames, genders))
-    console.table(students)
-    break
-  
-  case 11: /*Se muestra el nombre del alumno más pequeño*/
-    console.log(findSmallestStudent(students))
-    break
+const rl = readline.createInterface({
+  input: process.stdin, 
+  output: process.stdout, 
+});
 
-  case 12: /*Se muestra la edad media de todos los alumnos*/
-    console.log(calculateAverageAge(students))
-    break
+const info = `
+Pulsa el número de la opción deseada:
 
-  case 13: /*Se muestra la media de edad de las alumnas mujeres*/
-    let listOfWomen = students.filter(student => student.gender === "female" )
-    console.log(calculateAverageAge(listOfWomen))
-    break
+1- Mostrar los datos de los alumnos 
+2- Mostrar la cantidad de alumnos que hay en clase
+3- Mostrar los nombres de los alumnos
+4- Eliminar el último alumno de la clase
+5- Eliminar un alumno aleatorio de la clase
+6- Mostrar los datos de las alumnas mujeres
+7- Mostrar el número de alumnos hombres y el número de alumnas mujeres
+8- Mostrar si todos los alumnos son mujeres
+9- Mostrar los nombres de los alumnos de entre 20 y 25 años
+10- Añadir un alumno nuevo
+11- Mostrar el nombre de la persona más joven de la clase
+12- Mostrar la edad media de todos los alumnos de la clase (hombre y mujeres)
+13- Mostrar la edad media de las alumnas mujeres de la clase
+14- Añadir nueva nota a los alumnos
+15- Ordenar alumnos alfabéticamente 
+16- Mostrar el alumno con mejor puntuación
+17- Mostrar el nombre y la nota media del alumno con mejor media 
+18- Añadir un punto extra a cada nota de cada alumno
+`
 
-  case 14: /*Se crea una nota aleatoria de 1 a 10 en cada alumno*/
-    let randomNote
-    students.forEach(item => {
-      randomNote = calculateRandomNumber(1, 10)
-      item.examScores.push(randomNote)
+
+function getUserNumber() {
+  const promise = new Promise((resolve) => {
+    rl.question(info, (num) => {
+      rl.pause(); 
+      resolve(parseInt(num))
     })
-    console.table(students)
-    break
-
-  case 15: /*Se ordenan los alumnos por orden de lista*/
-    orderByAlphabet(students)
-    break
-  
-  case 16: /*Muestra el alumno con mayor puntuación*/
-    console.table(getBestScoredStudent(students))
-    break
-
-  case 17: //Muestra nombre y media del alumno con mejor media
-    console.table(getBestAvgStudent(students))
-    break
-
-  case 18: //Sube 1 punto a cada nota de cada alumno
-    console.table(incrementScores(students))
-    break
-
-  default:
-    console.log("es de prueba")
-    break
+  })
+  return promise;
 }
+
+
+let exit = false
+
+while (!exit){
+
+  let userNumber = await getUserNumber()
+  
+  switch(userNumber) {
+
+    case 1: /*Se imprimen los alumnos en una tabla*/
+      console.table(students)
+      break
+    
+    case 2: /*Se imprime la cantidad de alumnos*/
+      console.log(students.length)
+      break
+    
+    case 3: /*Se imprimen los nombres de los alumnos*/
+      students.forEach(item => console.log(item.name))
+      break
+    
+    case 4: /*Se elimina el último alumno del array*/
+      students.pop()
+      console.table(students)
+      break
+    
+    case 5: /*Se elimina un alumno aleatorio*/
+      let randomNumber = calculateRandomNumber(0, students.length-1)
+      students.splice(randomNumber, 1)
+      console.table(students)
+      break
+    
+    case 6: /*Se muestran los datos de las alumnas*/
+      let onlyWomen = students.filter(student => student.gender === "female" )
+      console.table(onlyWomen)
+      break
+    
+    case 7: /*Se muestra la cantidad de alumnos y de alumnas*/
+      let women = students.filter(student => student.gender === "female" )
+      let amountOfWomen = women.length
+      let men = students.filter(student => student.gender === "male" )
+      let amountOfMen = men.length
+      console.log("Alumnas: " + amountOfWomen)
+      console.log("Alumnos: " + amountOfMen)
+      break
+    
+    case 8: /*Muestra False si hay algún chico y True si son todas mujeres*/
+      console.log(areAllWomen(students))
+      break
+    
+    case 9: /*Se muestran los nombres de los alumnos de entre 20 y 25 años*/
+      let youngerStudents = students.filter(student => student.age >= 20 & student.age <= 25 )
+      youngerStudents.forEach(item => console.log(item.name))
+      break
+    
+    case 10: /*Se crea un nuevo alumno con datos aleatorios y sin notas*/
+      students.push(newStudent(maleNames, femaleNames, genders))
+      console.table(students)
+      break
+    
+    case 11: /*Se muestra el nombre del alumno más pequeño*/
+      console.log(findSmallestStudent(students))
+      break
+  
+    case 12: /*Se muestra la edad media de todos los alumnos*/
+      console.log(calculateAverageAge(students))
+      break
+  
+    case 13: /*Se muestra la media de edad de las alumnas mujeres*/
+      let listOfWomen = students.filter(student => student.gender === "female" )
+      console.log(calculateAverageAge(listOfWomen))
+      break
+  
+    case 14: /*Se crea una nota aleatoria de 1 a 10 en cada alumno*/
+      let randomNote
+      students.forEach(item => {
+        randomNote = calculateRandomNumber(1, 10)
+        item.examScores.push(randomNote)
+      })
+      console.table(students)
+      break
+  
+    case 15: /*Se ordenan los alumnos por orden de lista*/
+      orderByAlphabet(students)
+      break
+    
+    case 16: /*Muestra el alumno con mayor puntuación*/
+      console.table(getBestScoredStudent(students))
+      break
+  
+    case 17: //Muestra nombre y media del alumno con mejor media
+      console.table(getBestAvgStudent(students))
+      break
+  
+    case 18: //Sube 1 punto a cada nota de cada alumno
+      console.table(incrementScores(students))
+      break
+  
+    default:
+      exit = true
+      console.log("Has cerrado el gestor de alumnos. ¡Adiós!")
+      rl.close()
+      break
+  }
+}
+
+
+
 
 
 
