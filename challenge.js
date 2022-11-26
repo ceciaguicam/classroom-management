@@ -103,8 +103,13 @@ DONE-Cuando se pulsa 13 se muestra la edad media de las alumnas
   DONE.Hacer un array solo con los datos de las chicas (caso 6)
   DONE.Sacar la media de sus edades (caso 12)
 DONE-Cuando se pulsa 14 se añade una nota aleatoria entre 0 y 10 a cada uno de los alumnos
--Cuando se pulsa 15 se ordenan por orden alfabético la lista de alumnos
+DONE-Cuando se pulsa 15 se ordenan por orden alfabético la lista de alumnos
 -Cuando se pulsa 16 se muestra el alumno con las mejores notas (mayor sumatorio de notas)
+  DONE.Creo una variable de referencia igual a cero
+  DONE.Creo una variable con el nombre vacía
+  .Por cada elemento de la lista se suman sus notas y se guarda en una variable
+  .Comparo las 2 variable. Si la variable del sumatorio es mayor a la otra, esta última la igualo al sumatorio, y la variable del nombre la igual al nombre del item.
+  .Devuelvo la variable del nombre
 -Cuando se pulsa 17 se muestra al alumno con mejor nota media y su media
 -Cuando se pulsa 18 se añade 1 punto a cada nota de cada alumno. Si el alumno no tiene ninguna nota se le pone un 10. Si tiene algún 10
 no se sube la nota
@@ -158,6 +163,23 @@ function newStudent(maleNames, femaleNames, genders) {
   let newName = randomName(newGender, femaleNames, maleNames)
   let newObject = {age: newAge, examScores: [], gender: newGender, name: newName}
   return newObject
+}
+
+function getBestScoredStudent(students) {
+  let bestScore = 0
+  let bestScoredStudent 
+  
+  students.forEach(student => {
+      totalScore = student.examScores.reduce(
+        (a, b) => a + b
+      )
+      
+      if (totalScore > bestScore) {
+        bestScore = totalScore
+        bestScoredStudent = student
+      }
+  })
+  return bestScoredStudent
 }
 
 function sumAges(students) {
@@ -280,6 +302,16 @@ switch(userNumber) {
 
   case 15: /*Se ordenan los alumnos por orden de lista*/
     orderByAlphabet(students)
+    break
+  
+  case 16: /*Muestra el alumno con mayor puntuación*/
+    console.table(getBestScoredStudent(students))
+    break
+
+  case 17: //Muestra nombre y media del alumno con mejor media
+    break
+
+  case 18: //Sube 1 punto a cada nota de cada alumno
     break
 
   default:
