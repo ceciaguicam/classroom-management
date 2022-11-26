@@ -59,7 +59,7 @@ const maleNames = ['pepe', 'juan', 'victor', 'leo', 'francisco', 'carlos'];
 const femaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
 const genders = ['male', 'female'];
 
-let userNumber = 14
+let userNumber = 15
 
 /*
 
@@ -94,15 +94,15 @@ DONE-Cuando se pulsa 10 se añade un nuevo alumno con datos aleatorios: nombre, 
     DONE*Se devuelve esa variable
   DONE.Se crea una variable newObject y se iguala a la función
   DONE.Se añade el contenido de esa variable al final de la lista students
--Cuando se pulsa 11 se muestra el nombre de la persona más joven de clase
-  .Encontrar la edad más pequeña
-  .Encontrar al alumno con esa edad
-  .Mostrar en consola el nombre del alumno
+DONE-Cuando se pulsa 11 se muestra el nombre de la persona más joven de clase
+  DONE.Encontrar la edad más pequeña
+  DONE.Encontrar al alumno con esa edad
+  DONE.Mostrar en consola el nombre del alumno
 DONE-Cuando se pulsa 12 se muestra la edad media de los alumnos (incluidas las chicas)
 DONE-Cuando se pulsa 13 se muestra la edad media de las alumnas
   DONE.Hacer un array solo con los datos de las chicas (caso 6)
   DONE.Sacar la media de sus edades (caso 12)
--Cuando se pulsa 14 se añade una nota aleatoria entre 0 y 10 a cada uno de los alumnos
+DONE-Cuando se pulsa 14 se añade una nota aleatoria entre 0 y 10 a cada uno de los alumnos
 -Cuando se pulsa 15 se ordenan por orden alfabético la lista de alumnos
 -Cuando se pulsa 16 se muestra el alumno con las mejores notas (mayor sumatorio de notas)
 -Cuando se pulsa 17 se muestra al alumno con mejor nota media y su media
@@ -174,6 +174,35 @@ function calculateAverageAge(students) {
   return averageAge
 }
 
+function findSmallestStudent(students) {
+  let smallestAge = 51
+  let studentName
+  
+  students.forEach(student => {
+      if (student.age < smallestAge) {
+        studentName = student.name
+        smallestAge = student.age
+      }
+  })
+
+  return studentName
+}
+
+function orderByAlphabet(students) {
+  students.sort((studentA, studentB) => { 
+    if (studentA.name > studentB.name){
+      return 1
+    }
+
+    if (studentA.name < studentB.name){
+      return -1
+    }
+
+    return 0
+  })
+  console.table(students)
+}
+
 
 switch(userNumber) {
   case 1: /*Se imprimen los alumnos en una tabla*/
@@ -228,6 +257,7 @@ switch(userNumber) {
     break
   
   case 11: /*Se muestra el nombre del alumno más pequeño*/
+    console.log(findSmallestStudent(students))
     break
 
   case 12: /*Se muestra la edad media de todos los alumnos*/
@@ -246,6 +276,10 @@ switch(userNumber) {
       item.examScores.push(randomNote)
     })
     console.table(students)
+    break
+
+  case 15: /*Se ordenan los alumnos por orden de lista*/
+    orderByAlphabet(students)
     break
 
   default:
