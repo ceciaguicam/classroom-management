@@ -225,6 +225,26 @@ function orderByAlphabet(students) {
   console.table(students)
 }
 
+function getBestAvgStudent(students) {
+  let bestAvg = 0
+  let bestAvgStudent
+  
+  students.forEach(student => {
+      totalScore = student.examScores.reduce(
+        (a, b) => a + b
+      )
+
+      avgScore = totalScore / student.examScores.length
+      
+      if (avgScore > bestAvg) {
+        bestAvg = avgScore
+        bestAvgStudent = student.name
+      }
+
+      studentAndAvg = {name: bestAvgStudent, averageScore: bestAvg}
+  })
+  return studentAndAvg
+}
 
 switch(userNumber) {
   case 1: /*Se imprimen los alumnos en una tabla*/
@@ -309,6 +329,7 @@ switch(userNumber) {
     break
 
   case 17: //Muestra nombre y media del alumno con mejor media
+    console.table(getBestAvgStudent(students))
     break
 
   case 18: //Sube 1 punto a cada nota de cada alumno
