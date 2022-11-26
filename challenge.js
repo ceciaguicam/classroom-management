@@ -59,7 +59,7 @@ const maleNames = ['pepe', 'juan', 'victor', 'leo', 'francisco', 'carlos'];
 const femaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
 const genders = ['male', 'female'];
 
-let userNumber = 15
+let userNumber = 18
 
 /*
 
@@ -69,48 +69,18 @@ DONE-Cuando se pulse 2 se mostrará la cantidad de alumnos que hay
 DONE-Cuando se pulse 3 se mostrarán los nombres de los alumnos
 DONE-Cuando se pulse 4 se elimina el último alumno de la clase
 DONE-Cuando se pulse 5 se elimina a un alumno aleatorio de la clase
-  DONE.Una variable se iguala a un nº al azar entre el 1 y el length de la lista
-  DONE.Se elimina el item que tiene como índice el número aleatorio escogido
 DONE-Cuando se pulse 6 se muestran los datos de las alumnas
 DONE-Cuando se pulsa 7 se muestra la cantidad de alumnos y la cantidad de alumnas
-  DONE.Calcular la cantidad de alumnas y recogerlo en una variable
-  DONE.Calcular la cantidad de alumnos y recogerlo en una variable
-  DONE.Mostrar ambas variables en la consola
 DONE-Cuando se pulsa 8 se muestra True si todos los alumnos son chicas, y False si hay 1 o más chicos
-  DONE.Comprueba si hay algún chico en la lista
-  DONE.Devuelve False si hay alguno, y True si no hay ninguno
 DONE-Cuando se pulsa 9 se muestran los nombres de los alumnos de entre 20 y 25 años
-  DONE.Con filter se hace una variable con una lista con los nombres de los alumnos de entre 20 y 25 años
-  DONE.Se imprimen los nombres de la lista creada
 DONE-Cuando se pulsa 10 se añade un nuevo alumno con datos aleatorios: nombre, edad entre 20 y 50, género y calificaciones vacío
-  DONE.Se crea una función que crea un objeto nuevo
-    DONE*Se crea la variable gender sacando un elemento al azar de un array
-    DONE*Se crea la variable nomnbre
-    DONE*Si gender es male, la variable nombre se iguala a un elemento al azar de un array de nombres masculinos
-    DONE*Si gender es female, la variable nombre se iguala a un elemento al azar de un array de nombres femeninos
-    DONE*Se crea la variable y se iguala a un número al azar entre 20 y 25 usando la función calculateRandomNumber
-    DONE*Se crea una variable vacía llamada notas
-    DONE*Se crea una variable llamada newObject con un objeto con los datos que se acaban de crear en las variables
-    DONE*Se devuelve esa variable
-  DONE.Se crea una variable newObject y se iguala a la función
-  DONE.Se añade el contenido de esa variable al final de la lista students
 DONE-Cuando se pulsa 11 se muestra el nombre de la persona más joven de clase
-  DONE.Encontrar la edad más pequeña
-  DONE.Encontrar al alumno con esa edad
-  DONE.Mostrar en consola el nombre del alumno
 DONE-Cuando se pulsa 12 se muestra la edad media de los alumnos (incluidas las chicas)
 DONE-Cuando se pulsa 13 se muestra la edad media de las alumnas
-  DONE.Hacer un array solo con los datos de las chicas (caso 6)
-  DONE.Sacar la media de sus edades (caso 12)
 DONE-Cuando se pulsa 14 se añade una nota aleatoria entre 0 y 10 a cada uno de los alumnos
 DONE-Cuando se pulsa 15 se ordenan por orden alfabético la lista de alumnos
--Cuando se pulsa 16 se muestra el alumno con las mejores notas (mayor sumatorio de notas)
-  DONE.Creo una variable de referencia igual a cero
-  DONE.Creo una variable con el nombre vacía
-  .Por cada elemento de la lista se suman sus notas y se guarda en una variable
-  .Comparo las 2 variable. Si la variable del sumatorio es mayor a la otra, esta última la igualo al sumatorio, y la variable del nombre la igual al nombre del item.
-  .Devuelvo la variable del nombre
--Cuando se pulsa 17 se muestra al alumno con mejor nota media y su media
+DONE-Cuando se pulsa 16 se muestra el alumno con las mejores notas (mayor sumatorio de notas
+DONE-Cuando se pulsa 17 se muestra al alumno con mejor nota media y su media
 -Cuando se pulsa 18 se añade 1 punto a cada nota de cada alumno. Si el alumno no tiene ninguna nota se le pone un 10. Si tiene algún 10
 no se sube la nota
 */
@@ -246,6 +216,23 @@ function getBestAvgStudent(students) {
   return studentAndAvg
 }
 
+function incrementScores(students) {
+  students.forEach(student => {
+    if (student.examScores.length === 0){
+      student.examScores.push(10)
+      return
+    }
+
+    student.examScores = student.examScores.map(score => {
+      if (score !== 10) {
+        score += 1
+      }
+      return score
+    })
+  })
+  return students
+}
+
 switch(userNumber) {
   case 1: /*Se imprimen los alumnos en una tabla*/
     console.table(students)
@@ -333,6 +320,7 @@ switch(userNumber) {
     break
 
   case 18: //Sube 1 punto a cada nota de cada alumno
+    console.table(incrementScores(students))
     break
 
   default:
