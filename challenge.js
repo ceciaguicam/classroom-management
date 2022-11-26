@@ -108,17 +108,20 @@ function newStudent(maleNames, femaleNames, genders) {
 
 function getBestScoredStudent(students) {
   let bestScore = 0
-  let bestScoredStudent 
+  let bestScoredStudent = "No hay notas"
   
   students.forEach(student => {
-      let totalScore = student.examScores.reduce(
-        (a, b) => a + b
-      )
-      
-      if (totalScore > bestScore) {
-        bestScore = totalScore
-        bestScoredStudent = student
-      }
+    if (student.examScores.length === 0) {
+      return
+    }
+    let totalScore = student.examScores.reduce(
+      (a, b) => a + b
+    )
+    
+    if (totalScore > bestScore) {
+      bestScore = totalScore
+      bestScoredStudent = student
+    }
   })
   return bestScoredStudent
 }
@@ -169,8 +172,13 @@ function orderByAlphabet(students) {
 function getBestAvgStudent(students) {
   let bestAvg = 0
   let bestAvgStudent
-  
+  let studentAndAvg = "No hay ninguna nota"
+
   students.forEach(student => {
+      if (student.examScores.length === 0) {
+        return
+      }
+
       let totalScore = student.examScores.reduce(
         (a, b) => a + b
       )
@@ -230,6 +238,8 @@ Pulsa el número de la opción deseada:
 16- Mostrar el alumno con mejor puntuación
 17- Mostrar el nombre y la nota media del alumno con mejor media 
 18- Añadir un punto extra a cada nota de cada alumno
+
+Pulsa cualquier otra tecla para salir
 `
 
 
@@ -256,8 +266,8 @@ while (!exit){
       console.table(students)
       break
     
-    case 2: /*Se imprime la cantidad de alumnos*/
-      console.log(students.length)
+    case 2: /*Se imprime la cantidad de alumnos*/ 
+      console.log("Hay", students.length, "alumnos")
       break
     
     case 3: /*Se imprimen los nombres de los alumnos*/
@@ -290,7 +300,12 @@ while (!exit){
       break
     
     case 8: /*Muestra False si hay algún chico y True si son todas mujeres*/
-      console.log(areAllWomen(students))
+      if(areAllWomen(students)){
+        console.log("Son todas mujeres")
+      } 
+      else if(!areAllWomen(students)){
+        console.log("No son todos mujeres")
+      }
       break
     
     case 9: /*Se muestran los nombres de los alumnos de entre 20 y 25 años*/
@@ -304,16 +319,16 @@ while (!exit){
       break
     
     case 11: /*Se muestra el nombre del alumno más pequeño*/
-      console.log(findSmallestStudent(students))
+      console.log("El alumno más pequeño es", findSmallestStudent(students))
       break
   
     case 12: /*Se muestra la edad media de todos los alumnos*/
-      console.log(calculateAverageAge(students))
+      console.log("La edad media de edad de los alumnos es", calculateAverageAge(students))
       break
   
     case 13: /*Se muestra la media de edad de las alumnas mujeres*/
       let listOfWomen = students.filter(student => student.gender === "female" )
-      console.log(calculateAverageAge(listOfWomen))
+      console.log("La media de edad de las alumnas mujeres es", calculateAverageAge(listOfWomen))
       break
   
     case 14: /*Se crea una nota aleatoria de 1 a 10 en cada alumno*/
